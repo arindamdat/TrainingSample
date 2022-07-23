@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'dev'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -52,6 +52,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'ariwebappgit'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D694575330AB430FB68D788DECEF4DDF }}
+          slot-name: 'dev'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AE736594D7F8453E8C9D3613C5791BFA }}
           package: .
