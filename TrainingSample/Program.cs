@@ -3,10 +3,16 @@ using TrainingSample;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var azureAppConfigConnectionString = "Endpoint=https://ariappconfig.azconfig.io;Id=fZZb-lh-s0:vKd2VqgNzZbxm8z0rkUw;Secret=0BiRfv69E/R0v7vy/aqtAabGnlov0p0sGcqrXgGawB8=";
+//builder.Host.ConfigureAppConfiguration(configBuilder =>
+//{
+//    configBuilder.AddAzureAppConfiguration(azureAppConfigConnectionString, optional: false);
+//});
+builder.Configuration.AddAzureAppConfiguration(azureAppConfigConnectionString, optional: false);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<TrainingDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetValue<string>("ConnectionStrings:Training"),sql =>
+builder.Services.AddDbContext<TrainingDbContext>(opt => opt.UseSqlServer(builder.Configuration["Training"], sql =>
 {
     sql.EnableRetryOnFailure(5);
 
